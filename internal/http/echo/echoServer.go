@@ -5,7 +5,7 @@ import (
 
 	"github.com/anhcx0209/knovel-hometest/config"
 	"github.com/anhcx0209/knovel-hometest/database"
-	internal "github.com/anhcx0209/knovel-hometest/internal/http2"
+	internal "github.com/anhcx0209/knovel-hometest/internal/http"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
@@ -32,8 +32,8 @@ func (s *echoServer) Start() {
 	s.app.Use(middleware.Recover())
 	s.app.Use(middleware.Logger())
 
-	s.app.GET("v1/ping", func(c echo.Context) error {
-		return c.String(200, "pong")
+	s.app.GET("v1/health", func(c echo.Context) error {
+		return c.String(200, "OK")
 	})
 
 	serverUrl := fmt.Sprintf(":%d", s.conf.Server.Port)
